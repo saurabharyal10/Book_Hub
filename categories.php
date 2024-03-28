@@ -1,235 +1,88 @@
-<?php 
+<?php
+include_once('../book_store/connection/connection.php');
 include_once('includes/header.php');
+include_once('functions/function.php');
 ?>
 
 
-  <!-- catagory section -->
+<!-- catagory section -->
 
-  <section class="catagory_section layout_padding">
-    <div class="catagory_container">
-      <div class="container ">
-        <div class="heading_container heading_center">
-          <h2>
-            Books Categories
-          </h2>
-          <p>
-            There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
-          </p>
-        </div>
-        <div class="row">
-          <div class="col-sm-6 col-md-4 ">
-            <div class="box ">
-              <div class="img-box">
-                <img src="images/cat1.png" alt="">
-              </div>
-              <div class="detail-box">
-                <h5>
-                  Textbooks
-                </h5>
-                <p>
-                  fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                  The
-                  point of using
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-4 ">
-            <div class="box ">
-              <div class="img-box">
-                <img src="images/cat2.png" alt="">
-              </div>
-              <div class="detail-box">
-                <h5>
-                  Science
-                </h5>
-                <p>
-                  fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                  The
-                  point of using
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-4 ">
-            <div class="box ">
-              <div class="img-box">
-                <img src="images/cat3.png" alt="">
-              </div>
-              <div class="detail-box">
-                <h5>
-                  History
-                </h5>
-                <p>
-                  fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                  The
-                  point of using
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-4 ">
-            <div class="box ">
-              <div class="img-box">
-                <img src="images/cat4.png" alt="">
-              </div>
-              <div class="detail-box">
-                <h5>
-                  Biography
-                </h5>
-                <p>
-                  fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                  The
-                  point of using
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-4 ">
-            <div class="box ">
-              <div class="img-box">
-                <img src="images/cat5.png" alt="">
-              </div>
-              <div class="detail-box">
-                <h5>
-                  Adventure
-                </h5>
-                <p>
-                  fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                  The
-                  point of using
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-4 ">
-            <div class="box ">
-              <div class="img-box">
-                <img src="images/cat6.png" alt="">
-              </div>
-              <div class="detail-box">
-                <h5>
-                  Fantasy
-                </h5>
-                <p>
-                  fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                  The
-                  point of using
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+<section class="blog_section layout_padding">
+  <div class="container">
+    <div class="heading_container heading_center">
+      <h2>
+        Book We Have
+      </h2>
     </div>
-  </section>
+    <?php
+    $query_categories = "SELECT * FROM tbl_book_categories";
+    $result = $conn->query($query_categories);
+    while ($row_info = $result->fetch_assoc()) {
+      $categories_datas[] = $row_info;
+    }
+    foreach ($categories_datas as $categories_data) {
+      $category_name = $categories_data['category_name'];
+      $query_book = "SELECT * FROM tbl_books WHERE category_name = '$category_name' LIMIT 8";
+      $result_books = $conn->query($query_book);
 
-  <!-- end catagory section -->
-
-  <!-- info section -->
-
-  <section class="info_section layout_padding2">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-lg-3 info-col">
-          <div class="info_detail">
-            <h4>
-              About Us
-            </h4>
-            <p>
-              Vitae aut explicabo fugit facere alias distinctio, exem commodi mollitia minusem dignissimos atque asperiores incidunt vel voluptate iste
-            </p>
-            <div class="info_social">
-              <a href="">
-                <i class="fa fa-facebook" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-twitter" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-linkedin" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-instagram" aria-hidden="true"></i>
-              </a>
+      $book_datas = array();
+      // Check if there are books available for the current category
+      if ($result_books->num_rows > 0) {
+    ?>
+        <div class="book_category">
+          <h4 class="blog_date m-2 mt-3"><b>
+              <?php echo $categories_data['category_name']; ?>
+            </b>
+          </h4>
+        </div>
+        <div class="row" style="margin-top: -5vh;">
+          <?php
+          while ($row_books = $result_books->fetch_assoc()) {
+            $book_datas[] = $row_books;
+          }
+          foreach ($book_datas as $book_data) {
+          ?>
+            <div class="col-md-3">
+              <div class="box">
+                <div class="img-box">
+                  <img src="system_panel/data_informations/books_images/<?php echo $book_data['book_image']; ?>" alt="">
+                </div>
+                <div class="detail-box">
+                  <h5 style=" text-align: center; margin-top: -30px;">
+                    <?php
+                    echo $book_data['book_name'];
+                    ?>
+                  </h5>
+                  <p>
+                    <?php
+                    $book_description =  $book_data['book_description'];
+                    $truncated_description = truncateDescription($book_description, 45);
+                    echo $truncated_description;
+                    ?>
+                  </p>
+                </div>
+                <div class="read-more mb-3" style="text-align: center; margin-top: -35px;">
+                  <a href="">
+                    Read More...
+                  </a>
+                </div>
+              </div>
             </div>
-          </div>
+          <?php
+          }
+          ?>
+
         </div>
-        <div class="col-md-6 col-lg-3 info-col">
-          <div class="info_contact">
-            <h4>
-              Address
-            </h4>
-            <div class="contact_link_box">
-              <a href="">
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <span>
-                  Location
-                </span>
-              </a>
-              <a href="">
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                <span>
-                  Call +01 1234567890
-                </span>
-              </a>
-              <a href="">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-                <span>
-                  demo@gmail.com
-                </span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 info-col">
-          <div class="info_contact">
-            <h4>
-              Newsletter
-            </h4>
-            <form action="#">
-              <input type="text" placeholder="Enter email" />
-              <button type="submit">
-                Subscribe
-              </button>
-            </form>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 info-col">
-          <div class="map_container">
-            <div class="map">
-              <div id="googleMap"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <?php
+      }
+    }
+    ?>
 
-  <!-- end info section -->
+  </div>
+</section>
 
-  <!-- footer section -->
-  <footer class="footer_section">
-    <div class="container">
-      <p>
-        &copy; <span id="displayYear"></span> All Rights Reserved By
-        <a href="https://html.design/">Free Html Templates</a>
-      </p>
-    </div>
-  </footer>
-  <!-- footer section -->
+<!-- end catagory section -->
 
-  <!-- jQery -->
-  <script src="js/jquery-3.4.1.min.js"></script>
-  <!-- bootstrap js -->
-  <script src="js/bootstrap.js"></script>
-  <!-- custom js -->
-  <script src="js/custom.js"></script>
-  <!-- Google Map -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
-  </script>
-  <!-- End Google Map -->
-
-</body>
-
-</html>
+<?php
+include_once('includes/footer.php');
+?>
