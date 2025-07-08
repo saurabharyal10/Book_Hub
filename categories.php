@@ -45,7 +45,7 @@ include_once('functions/function.php');
             <div class="col-md-3">
               <div class="box">
                 <div class="img-box">
-                  <img src="system_panel/data_informations/books_images/<?php echo $book_data['book_image']; ?>" alt="">
+                  <img src="system_panel/data_informations/books_images/<?php echo $book_data['book_image']; ?>" height="350" alt="">
                 </div>
                 <div class="detail-box">
                   <h5 style=" text-align: center; margin-top: -30px;">
@@ -62,7 +62,7 @@ include_once('functions/function.php');
                   </p>
                 </div>
                 <div class="read-more mb-3" style="text-align: center; margin-top: -35px;">
-                  <a href="">
+                  <a href="books_description_page.php?id=<?php echo $book_data['id']; ?>">
                     Read More...
                   </a>
                 </div>

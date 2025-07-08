@@ -9,9 +9,8 @@
             <h4>
               About Us
             </h4>
-            <p>
-              Vitae aut explicabo fugit facere alias distinctio, exem commodi mollitia minusem dignissimos atque asperiores incidunt vel voluptate iste
-            </p>
+            <p style="text-align: justify;">
+              At Book Hub, we provide a wide range of textbooks, study materials, and digital resources at affordable prices. Our mission is to support students and lifelong learners with easy access to the tools they need to succeed.</p>
             <div class="info_social">
               <a href="">
                 <i class="fa fa-facebook" aria-hidden="true"></i>
@@ -110,6 +109,14 @@
       searchResultsDiv.innerHTML += 'Selected Categories: ' + selectedCategories.join(', ');
     }
   </script>
+  <!-- <script>
+    function displayCurrentYear() {
+      const year = new Date().getFullYear();
+      document.getElementById("displayYear").textContent = year;
+    }
+
+    window.onload = displayCurrentYear;
+  </script> -->
 
   <!-- jQery -->
   <script src="js/jquery-3.4.1.min.js"></script>

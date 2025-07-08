@@ -3,7 +3,12 @@ include_once('../book_store/connection/connection.php');
 include_once('includes/header.php');
 include_once('functions/function.php');
 ?>
-
+<style>
+  .blog_section .box .img-box img {
+    /* width: 100%; */
+    height: 35vh;
+  }
+</style>
 <!-- blog section -->
 
 <section class="blog_section layout_padding">
@@ -15,7 +20,7 @@ include_once('functions/function.php');
     </div>
     <div class="row">
       <?php
-      $query = "SELECT * FROM tbl_blogs LIMIT 50";
+      $query = "SELECT * FROM tbl_blogs WHERE `status` = 'Publish' LIMIT 50";
       $result = $conn->query($query);
       while ($row = $result->fetch_assoc()) {
         $datas[] = $row;

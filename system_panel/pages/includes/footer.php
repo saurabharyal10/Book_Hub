@@ -1,7 +1,7 @@
       <!-- partial:../../partials/_footer.html -->
       <footer class="footer">
           <div class="d-flex align-items-center justify-content-center">
-              <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2023. All rights reserved to <a href="https://www.saurabh-aryal.com.np/" target="_blank"> Saurabh Aryal</a>.</span>
+              <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <span id="displayYear"></span>. All rights reserved to <a href="https://www.saurabh-aryal.com.np/" target="_blank"> Saurabh Aryal</a>.</span>
           </div>
       </footer>
       <!-- partial -->
@@ -13,6 +13,14 @@
       <!-- container-scroller -->
       <!-- plugins:js -->
       <script src="../../vendors/js/vendor.bundle.base.js"></script>
+      <script>
+          function displayCurrentYear() {
+              const year = new Date().getFullYear();
+              document.getElementById("displayYear").textContent = year;
+          }
+
+          window.onload = displayCurrentYear;
+      </script>
       <!-- endinject -->
       <!-- Plugin js for this page -->
       <!-- End plugin js for this page -->

@@ -14,6 +14,12 @@ while ($row = $result->fetch_assoc()) {
   $data = $row;
 }
 ?>
+<style>
+  .blog_section .box .img-box img {
+    width: 100%;
+    height: 80vh;
+  }
+</style>
 <section class="blog_section layout_padding">
   <div class="container">
     <div class="heading_container heading_center">
@@ -26,7 +32,7 @@ while ($row = $result->fetch_assoc()) {
 
         <div class="box">
           <div class="img-box">
-            <img src="system_panel/data_informations/blog_images/<?php echo $data['blog_image']; ?>" alt="">
+            <img src="system_panel/data_informations/blog_images/<?php echo $data['blog_image']; ?>" alt="img.jpg">
           </div>
         </div>
         <div class="detail-box mt-5">
