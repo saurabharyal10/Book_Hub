@@ -1,5 +1,5 @@
 <?php
-include_once('../book_store/connection/connection.php');
+include_once(__DIR__ . '/connection/connection.php');
 include_once('includes/header.php');
 include_once('functions/function.php');
 ?>
